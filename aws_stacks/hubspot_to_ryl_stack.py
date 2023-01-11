@@ -1,4 +1,4 @@
-from aws_cdk import Stack
+from aws_cdk import CfnOutput, Stack
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_logs as logs
@@ -14,18 +14,18 @@ class HubspotToRYLStack(Stack):
         aws_powertools_layer = _lambda.LayerVersion.from_layer_version_arn(
             self,
             construct_id + "awspowertoolslayer",
-            layer_version_arn="arn:aws:lambda:us-east-1:930529236463:layer:aws-lambda-powertools-python-layer:1",
+            layer_version_arn=f"arn:aws:lambda:{self.region}:{self.account}:layer:aws-lambda-powertools-python-layer:1",
         )
 
         requests_layer = _lambda.LayerVersion.from_layer_version_arn(
             self,
             construct_id + "requestslayer",
-            layer_version_arn="arn:aws:lambda:us-east-1:930529236463:layer:requests-python-layer:2",
+            layer_version_arn=f"arn:aws:lambda:{self.region}:{self.account}:layer:requests-python-layer:2",
         )
 
         lmd_env = {"LOG_LEVEL": "DEBUG", "TABLE_NAME": table_name}
 
-        role_policy = iam.Policy(
+        lmd_role_policy = iam.Policy(
             self,
             f"{construct_id}ddbpolicy",
             statements=[
@@ -36,7 +36,6 @@ class HubspotToRYLStack(Stack):
                     effect=iam.Effect.ALLOW,
                     resources=[
                         f"arn:aws:dynamodb:{self.region}:{self.account}:table/{table_name}"
-                        f"arn:aws:dynamodb:{self.region}:{self.account}:table/{table_name}/index/*",
                     ],
                 )
             ],
@@ -52,13 +51,10 @@ class HubspotToRYLStack(Stack):
                 iam.ManagedPolicy.from_aws_managed_policy_name(
                     "service-role/AWSLambdaBasicExecutionRole"
                 ),
-                iam.ManagedPolicy.from_aws_managed_policy_name(
-                    "service-role/AWSLambdaRole"
-                ),
             ],
         )
 
-        lmd_role.attach_inline_policy(role_policy)
+        lmd_role.attach_inline_policy(lmd_role_policy)
 
         lmd_func = _lambda.Function(
             self,
@@ -71,4 +67,12 @@ class HubspotToRYLStack(Stack):
             environment=lmd_env,
             role=lmd_role,
             log_retention=logs.RetentionDays.ONE_WEEK,
+        )
+
+        CfnOutput(
+            self,
+            id=construct_id + "lmdarncfnoutput",
+            export_name=construct_id + "-lambdaarn",
+            description=construct_id + " lambda arn",
+            value=lmd_func.function_arn,
         )
