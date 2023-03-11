@@ -76,7 +76,7 @@ class HubspotToRYLStack(Stack):
         rule = events.Rule(
             self,
             "Rule",
-            schedule=events.Schedule.cron(minute="*/3"),
+            schedule=events.Schedule.cron(minute="*/5"),
         )
 
         rule.add_target(targets.LambdaFunction(lambda_func))
