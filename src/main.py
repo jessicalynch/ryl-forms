@@ -124,9 +124,12 @@ def lambda_handler(event: dict, context: dict):
 
             # Update form last run item if submissions were made
             if submitted:
+                logger.debug("Submitted: " + str(submitted))
+
                 last_run_item = {
                     "pk": "lastrun",
                     "sk": form_id,
+                    "desc": form_desc,
                     "ms": last_run_ms,
                     "dt": ms_to_utc_timestamp(last_run_ms),
                     "tot": submitted,
