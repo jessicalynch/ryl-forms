@@ -7,20 +7,11 @@ from aws_lambda_powertools.utilities.parser import BaseModel, Field, root_valida
 
 
 class HubspotIntake(BaseModel):
-    """Hubspot form intake"""
-
-    submitted_at: str
-    page_url: Annotated[Optional[str], Field(alias="pageUrl")]
-    values: HubspotIntakeValues
-
-    class Config:
-        extra = "allow"
-        allow_population_by_field_name = True
-
-
-class HubspotIntakeValues(BaseModel):
-    """Hubspot form intake nested response values"""
-
+    submitted_at: int
+    page_url: Annotated[
+        Optional[str],
+        Field(alias="pageUrl", description="URL the form was submitted from"),
+    ]
     firstname: str
     lastname: str
     email: str
@@ -47,6 +38,7 @@ class HubspotIntakeValues(BaseModel):
 
     class Config:
         extra = "allow"
+        allow_population_by_field_name = True
 
 
 class RYLIntake(BaseModel):

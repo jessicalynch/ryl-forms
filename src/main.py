@@ -1,28 +1,30 @@
 import os
-import time
 from datetime import datetime
+from typing import List
 
 import requests
 from aws_lambda_powertools import Logger
 
 from models.dynamodbtable import HubspotToRYLTable
-from models.models import HubspotIntakeValues, RYLIntake
+from models.models import HubspotIntake, RYLIntake
 
 logger = Logger(service="RYL")
-
-JOB_FREQUENCY_MINUTES = 1
-SECONDS_IN_MIN = 60
-MS_IN_SECOND = 1000
 
 HS_PAGE_SIZE = 20  # hubspot result limit can be between 20 and 50
 HS_URL_BASE = "https://api.hubapi.com/form-integrations/v1/submissions/forms/"
 TABLE_NAME = os.environ.get("TABLE_NAME")
 
 
+def ms_to_utc_timestamp(ms: int) -> str:
+    ms_in_second = 1000
+    return (
+        datetime.utcfromtimestamp(ms // ms_in_second).isoformat(timespec="seconds")
+        + "Z",
+    )
+
+
 def lambda_handler(event: dict, context: dict):
-    now = int(time.time() * MS_IN_SECOND)
-    now_dt = datetime.utcnow().isoformat(timespec="seconds")
-    job_freq = JOB_FREQUENCY_MINUTES * SECONDS_IN_MIN * MS_IN_SECOND
+    now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
 
     if not TABLE_NAME:
         return {"status": 500, "body": "Failed to get table name from env vars"}
@@ -40,15 +42,15 @@ def lambda_handler(event: dict, context: dict):
     headers = {"Authorization": "Bearer " + hs_key}
 
     # Query form IDs from DynamoDB table
-    #
-    # These could be used as an input for a step function map state
+    # TODO: these could be used as the input for a step function map state
     # and processed in parallel
     forms = db.query_items_by_partition_key(partition_key="hsform")
+    last_run_items = db.query_items_by_partition_key(partition_key="lastrun")
 
     num_forms = len(forms)
-    logger.debug(f"Processing {num_forms} forms")
+    processed = 0
 
-    total_intakes_submitted = {}
+    total_submissions_all_forms = 0
 
     hs_next_link = ""
 
@@ -57,24 +59,34 @@ def lambda_handler(event: dict, context: dict):
             form_id = form.get("sk")
             form_desc = form.get("desc")
             topic_id = form.get("topic_id")
+            processed += 1
+            logger.debug(
+                f"Processing {form_desc} form {form_id} ({processed} of {num_forms})"
+            )
 
-            logger.debug("Form ID: " + form_id)
+            last_run_item = next(
+                iter(filter(lambda x: x.get("sk") == form_id, last_run_items)), None
+            )
+            last_run_ms = last_run_item.get("ms") if last_run_item else 0
 
             # Get all new submissions for the curent form
-            new_submissions = []
+            new_submissions: List[HubspotIntake] = []
             while True:
                 post_url = f"{HS_URL_BASE}{form_id}?limit={HS_PAGE_SIZE}{hs_next_link}"
                 resp = requests.get(post_url, headers=headers).json()
 
                 # Filter out submissions older than previous job run
                 results = [
-                    HubspotIntakeValues(
-                        **{val["name"]: val["value"] for val in r.get("values")}
+                    HubspotIntake(
+                        **{val["name"]: val["value"] for val in r.get("values")},
+                        submitted_at=r.get("submittedAt"),
+                        page_url=r.get("pageUrl"),
                     )
                     for r in resp.get("results", [])
-                    if r.get("submittedAt") and now - r.get("submittedAt") < job_freq
+                    if r.get("submittedAt") and r.get("submittedAt") > last_run_ms
                 ]
 
+                # Break if results are not newer than last run
                 if not results:
                     break
 
@@ -88,36 +100,57 @@ def lambda_handler(event: dict, context: dict):
                     break
                 hs_next_link = "&after=" + after
 
-            form_ryl_intakes = [
-                RYLIntake(**s.dict(), mcmauthkey=ryl_auth_key, campaigntopicid=topic_id)
-                for s in new_submissions
-            ]
+            submitted = 0
+            for s in new_submissions[::-1]:
+                try:
+                    ryl_intake = RYLIntake(
+                        **s.dict(), mcmauthkey=ryl_auth_key, campaigntopicid=topic_id
+                    )
+                    payload = ryl_intake.dict()
 
-            for r in form_ryl_intakes:
-                payload = r.dict()
-                ryl_resp = requests.post(ryl_url, data=payload)
+                    ryl_resp = requests.post(ryl_url, data=payload)
+                    if ryl_resp.status_code not in [200, 201]:
+                        break
 
-            form_total = len(form_ryl_intakes)
+                    # Update last run ms after successful submission
+                    last_run_ms = s.submitted_at
+                    submitted += 1
 
-            total_intakes_submitted[form_id] = {
-                "topic_id": topic_id,
-                "total": form_total,
-            }
+                except Exception as e:
+                    logger.debug(
+                        f"Form {form_id} ({form_desc}) failed to submit \
+                            {len(new_submissions) - submitted} of {len(new_submissions)} new submission"
+                    )
+                    break
 
-            last_run_item = {
-                "pk": "lastrun",
-                "sk": form_id,
-                "desc": form_desc,
-                "ms": now,
-                "dt": now_dt,
-                "tot": form_total,
-            }
+            # Update form last run item if submissions were made
+            if submitted:
+                last_run_item = {
+                    "pk": "lastrun",
+                    "sk": form_id,
+                    "ms": last_run_ms,
+                    "dt": ms_to_utc_timestamp(last_run_ms),
+                    "tot": submitted,
+                }
 
-            db.put_item(last_run_item)
+                db.put_item(last_run_item)
 
-            logger.debug(f"Total: {form_total}")
+                total_submissions_all_forms += submitted
 
-        response = {"status": 200, "body": total_intakes_submitted}
+        # Write an overall summary item
+        summary_item = {
+            "pk": "lastrun",
+            "sk": "summary",
+            "forms": num_forms,
+            "submissions": total_submissions_all_forms,
+            "dt": now,
+        }
+
+        db.put_item(summary_item)
+
+        summary_message = f"Total submissions: {total_submissions_all_forms}"
+        logger.debug(summary_message)
+        response = {"status": 200, "body": summary_message}
 
         return response
 
