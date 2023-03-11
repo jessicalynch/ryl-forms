@@ -59,13 +59,11 @@ def lambda_handler(event: dict, context: dict):
 
     num_forms = len(forms)
     processed = 0
-
     total_submissions_all_forms = 0
-
-    hs_next_link = ""
 
     try:
         for form in forms:
+            hs_next_link = ""
             form_id = form.get("sk")
             form_desc = form.get("desc")
             topic_id = form.get("topic_id")
@@ -157,7 +155,7 @@ def lambda_handler(event: dict, context: dict):
             "sk": run_iso_str,
             "dur": run_duration,
             "forms": num_forms,
-            "subs": total_submissions_all_forms,
+            "tot": total_submissions_all_forms,
             "ttl": days_to_ttl_seconds(days=LAST_RUN_HISTORY_DAYS),
         }
 
