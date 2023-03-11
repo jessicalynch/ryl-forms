@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime
 
 import requests
 from aws_lambda_powertools import Logger
@@ -10,8 +11,8 @@ from models.models import HubspotIntakeValues, RYLIntake
 logger = Logger(service="RYL")
 
 JOB_FREQUENCY_MINUTES = 1
-MINUTES_IN_HOUR = 60
-MS_IN_MINUTE = 1000
+SECONDS_IN_MIN = 60
+MS_IN_SECOND = 1000
 
 HS_PAGE_SIZE = 20  # hubspot result limit can be between 20 and 50
 HS_URL_BASE = "https://api.hubapi.com/form-integrations/v1/submissions/forms/"
@@ -19,8 +20,9 @@ TABLE_NAME = os.environ.get("TABLE_NAME")
 
 
 def lambda_handler(event: dict, context: dict):
-    now = int(time.time() * MS_IN_MINUTE)
-    job_freq = JOB_FREQUENCY_MINUTES * MINUTES_IN_HOUR * MS_IN_MINUTE
+    now = int(time.time() * MS_IN_SECOND)
+    now_dt = datetime.utcnow().isoformat(timespec="seconds")
+    job_freq = JOB_FREQUENCY_MINUTES * SECONDS_IN_MIN * MS_IN_SECOND
 
     if not TABLE_NAME:
         return {"status": 500, "body": "Failed to get table name from env vars"}
@@ -37,7 +39,10 @@ def lambda_handler(event: dict, context: dict):
     ryl_url = creds.get("rylurl")
     headers = {"Authorization": "Bearer " + hs_key}
 
-    # Query forms
+    # Query form IDs from DynamoDB table
+    #
+    # These could be used as an input for a step function map state
+    # and processed in parallel
     forms = db.query_items_by_partition_key(partition_key="hsform")
 
     num_forms = len(forms)
@@ -50,6 +55,7 @@ def lambda_handler(event: dict, context: dict):
     try:
         for form in forms:
             form_id = form.get("sk")
+            form_desc = form.get("desc")
             topic_id = form.get("topic_id")
 
             logger.debug("Form ID: " + form_id)
@@ -97,6 +103,17 @@ def lambda_handler(event: dict, context: dict):
                 "topic_id": topic_id,
                 "total": form_total,
             }
+
+            last_run_item = {
+                "pk": "lastrun",
+                "sk": form_id,
+                "desc": form_desc,
+                "ms": now,
+                "dt": now_dt,
+                "tot": form_total,
+            }
+
+            db.put_item(last_run_item)
 
             logger.debug(f"Total: {form_total}")
 

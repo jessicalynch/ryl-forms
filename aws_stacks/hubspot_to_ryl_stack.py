@@ -1,4 +1,6 @@
 from aws_cdk import CfnOutput, Stack
+from aws_cdk import aws_events as events
+from aws_cdk import aws_events_targets as targets
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_logs as logs
@@ -23,9 +25,9 @@ class HubspotToRYLStack(Stack):
             layer_version_arn=f"arn:aws:lambda:{self.region}:{self.account}:layer:requests-python-layer:2",
         )
 
-        lmd_env = {"LOG_LEVEL": "DEBUG", "TABLE_NAME": table_name}
+        lambda_env = {"LOG_LEVEL": "DEBUG", "TABLE_NAME": table_name}
 
-        lmd_role_policy = iam.Policy(
+        lambda_role_policy = iam.Policy(
             self,
             f"{construct_id}ddbpolicy",
             statements=[
@@ -41,7 +43,7 @@ class HubspotToRYLStack(Stack):
             ],
         )
 
-        lmd_role = iam.Role(
+        lambda_role = iam.Role(
             self,
             f"{construct_id}lmdrole",
             role_name=construct_id + "-role",
@@ -54,9 +56,9 @@ class HubspotToRYLStack(Stack):
             ],
         )
 
-        lmd_role.attach_inline_policy(lmd_role_policy)
+        lambda_role.attach_inline_policy(lambda_role_policy)
 
-        lmd_func = _lambda.Function(
+        lambda_func = _lambda.Function(
             self,
             construct_id + "lambda",
             function_name=construct_id + "lambdafunc",
@@ -64,15 +66,23 @@ class HubspotToRYLStack(Stack):
             handler="main.lambda_handler",
             code=_lambda.Code.from_asset("src"),
             layers=[aws_powertools_layer, requests_layer],
-            environment=lmd_env,
-            role=lmd_role,
+            environment=lambda_env,
+            role=lambda_role,
             log_retention=logs.RetentionDays.ONE_WEEK,
         )
+
+        rule = events.Rule(
+            self,
+            "Rule",
+            schedule=events.Schedule.cron(minute="*"),
+        )
+
+        rule.add_target(targets.LambdaFunction(lambda_func))
 
         CfnOutput(
             self,
             id=construct_id + "lmdarncfnoutput",
             export_name=construct_id + "-lambdaarn",
             description=construct_id + " lambda arn",
-            value=lmd_func.function_arn,
+            value=lambda_func.function_arn,
         )

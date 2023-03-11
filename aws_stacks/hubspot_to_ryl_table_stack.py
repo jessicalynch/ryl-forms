@@ -9,7 +9,7 @@ class HubspotToRYLTableStack(Stack):
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        dynamo_table = dynamo.Table(
+        dynamo.Table(
             self,
             id=f"{construct_id}-{table_name}",
             table_name=table_name,
