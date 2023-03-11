@@ -12,10 +12,10 @@ class HubspotIntake(BaseModel):
         Optional[str],
         Field(alias="pageUrl", description="URL the form was submitted from"),
     ]
-    firstname: str
-    lastname: str
-    email: str
-    phone: str
+    firstname: Optional[str] = ""
+    lastname: Optional[str] = ""
+    email: Optional[str] = ""
+    phone: Optional[str] = ""
     mobilephone: Optional[str] = ""
     address: Optional[str] = ""
     city: Optional[str] = ""
