@@ -10,14 +10,17 @@ from models.models import HubspotIntakeValues, RYLIntake
 logger = Logger(service="RYL")
 
 JOB_FREQUENCY_MINUTES = 5
+MINUTES_IN_HOUR = 60
+MS_IN_MINUTE = 1000
+
 HS_PAGE_SIZE = 20  # hubspot result limit can be between 20 and 50
 HS_URL_BASE = "https://api.hubapi.com/form-integrations/v1/submissions/forms/"
 TABLE_NAME = os.environ.get("TABLE_NAME")
 
 
 def lambda_handler(event: dict, context: dict):
-    now = int(time.time() * 1000)
-    job_freq = JOB_FREQUENCY_MINUTES * 60 * 1000
+    now = int(time.time() * MS_IN_MINUTE)
+    job_freq = JOB_FREQUENCY_MINUTES * MINUTES_IN_HOUR * MS_IN_MINUTE
 
     if not TABLE_NAME:
         return {"status": 500, "body": "Failed to get table name from env vars"}
@@ -29,9 +32,10 @@ def lambda_handler(event: dict, context: dict):
     if not creds:
         return {"status": 401, "body": "Failed to get API credentials from table"}
 
-    hs_api_key = creds.get("hskey")
+    hs_key = creds.get("hskey")
     ryl_auth_key = creds.get("mcmauthkey")
     ryl_url = creds.get("rylurl")
+    headers = {"Authorization": "Bearer " + hs_key}
 
     # Query forms
     forms = db.query_items_by_partition_key(partition_key="hsform")
@@ -53,8 +57,8 @@ def lambda_handler(event: dict, context: dict):
             # Get all new submissions for the curent form
             new_submissions = []
             while True:
-                post_url = f"{HS_URL_BASE}{form_id}?limit={HS_PAGE_SIZE}&hapikey={hs_api_key}{hs_next_link}"
-                resp = requests.get(post_url).json()
+                post_url = f"{HS_URL_BASE}{form_id}?limit={HS_PAGE_SIZE}{hs_next_link}"
+                resp = requests.get(post_url, headers=headers).json()
 
                 # Filter out submissions older than previous job run
                 results = [
