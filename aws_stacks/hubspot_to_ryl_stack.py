@@ -64,7 +64,7 @@ class HubspotToRYLStack(Stack):
             construct_id + "lambda",
             function_name=construct_id + "lambdafunc",
             runtime=_lambda.Runtime.PYTHON_3_9,
-            timeout=Duration.minutes(5),
+            timeout=Duration.minutes(3),
             handler="main.lambda_handler",
             code=_lambda.Code.from_asset("src"),
             layers=[aws_powertools_layer, requests_layer],
@@ -76,7 +76,7 @@ class HubspotToRYLStack(Stack):
         rule = events.Rule(
             self,
             "Rule",
-            schedule=events.Schedule.cron(minute="*"),
+            schedule=events.Schedule.cron(minute="*/3"),
         )
 
         rule.add_target(targets.LambdaFunction(lambda_func))
