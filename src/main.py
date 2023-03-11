@@ -33,7 +33,8 @@ def days_to_ttl_seconds(days: int) -> int:
 
 
 def lambda_handler(event: dict, context: dict):
-    now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    run_start = time.time()
+    run_iso_str = datetime.utcnow().isoformat(timespec="seconds") + "Z"
 
     if not TABLE_NAME:
         return {"status": 500, "body": "Failed to get table name from env vars"}
@@ -150,11 +151,13 @@ def lambda_handler(event: dict, context: dict):
                 total_submissions_all_forms += submitted
 
         # Write an overall summary item
+        run_duration = int(time.time() - run_start)
         summary_item = {
             "pk": "lastrun#summary",
-            "sk": now,
+            "sk": run_iso_str,
+            "dur": run_duration,
             "forms": num_forms,
-            "submissions": total_submissions_all_forms,
+            "subs": total_submissions_all_forms,
             "ttl": days_to_ttl_seconds(days=LAST_RUN_HISTORY_DAYS),
         }
 
