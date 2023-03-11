@@ -127,7 +127,7 @@ def lambda_handler(event: dict, context: dict):
                     submitted += 1
 
                 except Exception as e:
-                    logger.debug(
+                    logger.error(
                         f"Form {form_id} ({form_desc}) failed to submit \
                             {len(new_submissions) - submitted} of {len(new_submissions)} new submission"
                     )
