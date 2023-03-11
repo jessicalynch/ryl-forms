@@ -17,10 +17,9 @@ TABLE_NAME = os.environ.get("TABLE_NAME")
 
 def ms_to_utc_timestamp(ms: int) -> str:
     ms_in_second = 1000
-    return (
-        datetime.utcfromtimestamp(ms // ms_in_second).isoformat(timespec="seconds")
-        + "Z",
-    )
+    dt = datetime.utcfromtimestamp(ms // ms_in_second)
+    iso_str = dt.isoformat(timespec="seconds") + "Z"
+    return iso_str
 
 
 def lambda_handler(event: dict, context: dict):

@@ -4,6 +4,7 @@ from aws_cdk import aws_events_targets as targets
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_logs as logs
+from aws_cdk import Duration
 from constructs import Construct
 
 
@@ -63,6 +64,7 @@ class HubspotToRYLStack(Stack):
             construct_id + "lambda",
             function_name=construct_id + "lambdafunc",
             runtime=_lambda.Runtime.PYTHON_3_9,
+            timeout=Duration.minutes(5),
             handler="main.lambda_handler",
             code=_lambda.Code.from_asset("src"),
             layers=[aws_powertools_layer, requests_layer],
