@@ -24,7 +24,6 @@ class DynamoDBTable:
         sort_key_attr: str = None,
         use_local_endpoint=False,
     ):
-
         self.table_name = table_name
         self.endpoint_url = None
         self.partition_key_attr = partition_key_attr

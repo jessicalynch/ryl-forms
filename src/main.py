@@ -9,7 +9,7 @@ from models.models import HubspotIntakeValues, RYLIntake
 
 logger = Logger(service="RYL")
 
-JOB_FREQUENCY_MINUTES = 5
+JOB_FREQUENCY_MINUTES = 1
 MINUTES_IN_HOUR = 60
 MS_IN_MINUTE = 1000
 
