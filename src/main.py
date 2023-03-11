@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime
 from typing import List
 
@@ -13,6 +14,7 @@ logger = Logger(service="RYL")
 HS_PAGE_SIZE = 20  # hubspot result limit can be between 20 and 50
 HS_URL_BASE = "https://api.hubapi.com/form-integrations/v1/submissions/forms/"
 TABLE_NAME = os.environ.get("TABLE_NAME")
+LAST_RUN_HISTORY_DAYS = 7
 
 
 def ms_to_utc_timestamp(ms: int) -> str:
@@ -20,6 +22,14 @@ def ms_to_utc_timestamp(ms: int) -> str:
     dt = datetime.utcfromtimestamp(ms // ms_in_second)
     iso_str = dt.isoformat(timespec="seconds") + "Z"
     return iso_str
+
+
+def days_to_ttl_seconds(days: int) -> int:
+    seconds_in_minute = 60
+    minutes_in_hour = 60
+    hours_in_day = 24
+    ttl = int(time.time()) + seconds_in_minute * minutes_in_hour * hours_in_day * days
+    return ttl
 
 
 def lambda_handler(event: dict, context: dict):
@@ -141,11 +151,11 @@ def lambda_handler(event: dict, context: dict):
 
         # Write an overall summary item
         summary_item = {
-            "pk": "lastrun",
-            "sk": "summary",
+            "pk": "lastrun#summary",
+            "sk": now,
             "forms": num_forms,
             "submissions": total_submissions_all_forms,
-            "dt": now,
+            "ttl": days_to_ttl_seconds(days=LAST_RUN_HISTORY_DAYS),
         }
 
         db.put_item(summary_item)
