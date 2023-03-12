@@ -65,7 +65,7 @@ class HubspotToRYLSfnStack(Stack):
             construct_id + "lambda",
             function_name=construct_id + "lambdafunc",
             runtime=_lambda.Runtime.PYTHON_3_9,
-            timeout=Duration.minutes(15),
+            timeout=Duration.minutes(3),
             handler="main.lambda_handler",
             code=_lambda.Code.from_asset("src"),
             layers=[aws_powertools_layer, requests_layer],
