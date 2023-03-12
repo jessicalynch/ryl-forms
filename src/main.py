@@ -31,15 +31,8 @@ def lambda_handler(event: EventInput, context: LambdaContext):
 
     form_id = event.form.sk
     form_desc = event.form.desc
-    topic_id = event.form.topic_id
 
     db = HubspotToRYLTable(table_name=TABLE_NAME)
-
-    hs_key = event.creds.hskey
-    ryl_auth_key = event.creds.mcmauthkey
-    ryl_url = event.creds.rylurl
-    hs_url = event.creds.hsurl
-    headers = {"Authorization": "Bearer " + hs_key}
 
     last_run_item = db.get_item_by_composite_key(
         partition_key="lastrun", sort_key=form_id
@@ -49,6 +42,9 @@ def lambda_handler(event: EventInput, context: LambdaContext):
 
     # Get all new submissions for the curent form
     new_submissions: List[HubspotIntake] = []
+    ryl_url = event.creds.rylurl
+    hs_url = event.creds.hsurl
+    headers = {"Authorization": "Bearer " + event.creds.hskey}
     hs_next_link = ""
     while True:
         post_url = f"{hs_url}{form_id}?limit={HS_PAGE_SIZE}{hs_next_link}"
@@ -83,7 +79,9 @@ def lambda_handler(event: EventInput, context: LambdaContext):
     for s in new_submissions[::-1]:
         try:
             ryl_intake = RYLIntake(
-                **s.dict(), mcmauthkey=ryl_auth_key, campaigntopicid=topic_id
+                **s.dict(),
+                mcmauthkey=event.creds.mcmauthkey,
+                campaigntopicid=event.form.topic_id,
             )
             payload = ryl_intake.dict()
 
@@ -97,8 +95,8 @@ def lambda_handler(event: EventInput, context: LambdaContext):
 
         except Exception as e:
             logger.error(
-                f"Form {form_id} ({form_desc}) failed to submit \
-                        {len(new_submissions) - submitted} of {len(new_submissions)} new submission"
+                f"Form {form_id} ({form_desc}) failed to submit {len(new_submissions) - submitted} \
+                    of {len(new_submissions)} new submissions. Last submission: {last_run_ms}"
             )
             break
 
