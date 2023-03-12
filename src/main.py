@@ -34,7 +34,6 @@ def lambda_handler(event: EventInput, context: LambdaContext):
     topic_id = event.form.topic_id
 
     db = HubspotToRYLTable(table_name=TABLE_NAME)
-    creds = db.get_item_by_composite_key(partition_key="creds", sort_key="ryl")
 
     hs_key = event.creds.hskey
     ryl_auth_key = event.creds.mcmauthkey
