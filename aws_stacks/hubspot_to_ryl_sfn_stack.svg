@@ -1,0 +1,215 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" class="sc-hjQCSK iOOXDE graph" data-testid="graph" width="580" height="720"><g transform="translate(12,12)" class="new-look-graph"><g class="nodes"><g class="node-container" transform="translate(278,22)"><g><circle class="sc-gITdmR dOOrib shape" r="22"/><text class="sc-brCFrO iUlozD label"><tspan xml:space="preserve" text-anchor="middle" alignment-baseline="central">Start</tspan></text></g></g><g class="node-container" transform="translate(278,186)"><g class="sc-hNKHps ejDZrz node state container Parallel" data-testid="graph-Query DynamoDB data" data-state-id="graph-Query DynamoDB data" data-state-type="Parallel"><g class="new-look-state-node "><g class="bounding-box" transform="translate(0,5)"><rect class="sc-fIavCj mDZTb shape" rx="7" ry="7" x="-278" y="-107" width="556" height="209"/><g class="content" transform="translate(-278,-107)"><g class="branch" transform="translate(20,89)"><g class="branchInsertArea" data-insertion-index="0" data-parent-state-id="Query DynamoDB data" id="Query DynamoDB data:0" x="-20" y="0" width="20" height="100"><rect x="-20" y="0" width="20" height="100" stroke="none" fill="none"/><path d="M-10,0 l0,100" stroke="none" fill="none"/></g><g transform=""><g class="nodes"><g class="node-container" transform="translate(128,24.5)"><g class="sc-hNKHps ejDZrz node state Task" data-testid="graph-Query all Hubspot form IDs" data-state-id="Query all Hubspot form IDs" data-state-type="Task"><g class="new-look-state-node "><rect x="-128" y="-24.5" width="256" height="49" rx="3" ry="3"/><g class="handle" transform="translate(-128,-24.5)"><path d="M5,16 L5,34 M8,16 L8,34"/></g><g class="icon" transform="translate(-112,-24)"><rect fill="var(--color-background-container-header-g9rg0j, #fafafa)" x="0.0361026108" y="0.0181291967" width="48" height="48"/><line x1="47.5" y1="0.49122807" x2="47.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><line x1="0.5" y1="0.49122807" x2="0.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><use href="#icon-service-ddb"/></g><g class="text-lines" transform="translate(-56,-24.5)"><text transform="translate(0,17)" class="line1"><tspan xml:space="preserve" text-anchor="start">DynamoDB: Query</tspan></text><text transform="translate(0,35.5)" class="line2 label"><tspan xml:space="preserve" text-anchor="start">Query all Hubspot form IDs</tspan></text></g></g></g></g><g class="node-container" transform="translate(128,92)"><g><circle class="sc-evrZIY hbQMNV shape" r="8"/></g></g></g><g class="edges"><g class="sc-dsQDmV gofmjl edge"><path id="state-Query all Hubspot form IDs:end:normal" d="M128,49L128,51.916666666666664C128,54.833333333333336,128,60.666666666666664,128,66.5C128,72.33333333333333,128,78.16666666666667,128,81.08333333333333L128,84" marker-end="url(#arrowhead)" fill="none"/></g></g></g><g class="branchInsertArea" data-insertion-index="1" data-parent-state-id="Query DynamoDB data" id="Query DynamoDB data:1" x="256" y="0" width="20" height="100"><rect x="256" y="0" width="20" height="100" stroke="none" fill="none"/><path d="M266,0 l0,100" stroke="none" fill="none"/></g></g><g class="branch" transform="translate(296,89)"><g transform=""><g class="nodes"><g class="node-container" transform="translate(120,24.5)"><g class="sc-hNKHps ejDZrz node state Task" data-testid="graph-Get creds item" data-state-id="Get creds item" data-state-type="Task"><g class="new-look-state-node "><rect x="-120" y="-24.5" width="240" height="49" rx="3" ry="3"/><g class="handle" transform="translate(-120,-24.5)"><path d="M5,16 L5,34 M8,16 L8,34"/></g><g class="icon" transform="translate(-104,-24)"><rect fill="var(--color-background-container-header-g9rg0j, #fafafa)" x="0.0361026108" y="0.0181291967" width="48" height="48"/><line x1="47.5" y1="0.49122807" x2="47.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><line x1="0.5" y1="0.49122807" x2="0.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><use href="#icon-service-ddb"/></g><g class="text-lines" transform="translate(-48,-24.5)"><text transform="translate(0,17)" class="line1"><tspan xml:space="preserve" text-anchor="start">DynamoDB: GetItem</tspan></text><text transform="translate(0,35.5)" class="line2 label"><tspan xml:space="preserve" text-anchor="start">Get creds item</tspan></text></g></g></g></g><g class="node-container" transform="translate(120,92)"><g><circle class="sc-evrZIY hbQMNV shape" r="8"/></g></g></g><g class="edges"><g class="sc-dsQDmV gofmjl edge"><path id="state-Get creds item:end:normal" d="M120,49L120,51.916666666666664C120,54.833333333333336,120,60.666666666666664,120,66.5C120,72.33333333333333,120,78.16666666666667,120,81.08333333333333L120,84" marker-end="url(#arrowhead)" fill="none"/></g></g></g><g class="branchInsertArea" data-insertion-index="2" data-parent-state-id="Query DynamoDB data" id="Query DynamoDB data:2" x="240" y="0" width="20" height="100"><rect x="240" y="0" width="20" height="100" stroke="none" fill="none"/><path d="M250,0 l0,100" stroke="none" fill="none"/></g></g><g class="sc-dsQDmV gofmjl"><path id="Query DynamoDB data-Query all Hubspot form IDs" class="path starting-connection" d="M278,44L278,47.75C278,51.5,278,59,256.3333333333333,62.75C234.66666666666666,66.5,191.33333333333334,66.5,169.66666666666666,70.25C148,74,148,81.5,148,85.25L148,89" fill="none"/></g><g class="sc-dsQDmV gofmjl"><path id="Query DynamoDB data-Get creds item" class="path starting-connection" d="M278,44L278,47.75C278,51.5,278,59,301,62.75C324,66.5,370,66.5,393,70.25C416,74,416,81.5,416,85.25L416,89" fill="none"/></g></g></g><g class="new-look-state-node "><rect x="-120" y="-107" width="240" height="49" rx="3" ry="3"/><g class="handle" transform="translate(-120,-107)"><path d="M5,16 L5,34 M8,16 L8,34"/></g><g class="icon" transform="translate(-104,-106.5)"><rect fill="var(--color-background-container-header-g9rg0j, #fafafa)" x="0.0361026108" y="0.0181291967" width="48" height="48"/><line x1="47.5" y1="0.49122807" x2="47.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><line x1="0.5" y1="0.49122807" x2="0.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><use href="#icon-flow-parallel"/></g><g class="text-lines" transform="translate(-48,-107)"><text transform="translate(0,17)" class="line1"><tspan xml:space="preserve" text-anchor="start">Parallel state</tspan></text><text transform="translate(0,35.5)" class="line2 label"><tspan xml:space="preserve" text-anchor="start">Query DynamoDB data</tspan></text></g></g></g></g></g><g class="node-container" transform="translate(278,472.5)"><g class="sc-hNKHps ejDZrz node state container Map" data-state-id="Process forms map state" data-state-type="Map"><g class="new-look-state-node "><g class="bounding-box" transform="translate(0,5)"><g class="shape new-look-state-node-sub"><rect rx="3" ry="3" x="-140" y="-144.5" width="280" height="284" class="sc-fIavCj mDZTb"/><rect x="-105" y="-100.5" width="210" height="26" class="sc-fIavCj sc-duzrYq mDZTb zgit"/><svg x="-90" y="-104" width="25" height="25" viewBox="0 -8 25 25" xmlns="http://www.w3.org/2000/svg"><g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.867687044"><g id="ONE-MAP---graph---inline-map" transform="translate(-55.000000, -217.000000)" fill="#687078" fill-rule="nonzero"><g id="Group-15" transform="translate(36.000000, 213.000000)"><g id="script" transform="translate(19.000000, 4.000000)"><path d="M11.60121,15.4462891 C12.5601274,15.4462891 13.2010167,15.2896753 13.5238779,14.9764478 C13.8467393,14.6632203 14.0081699,14.0388817 14.0081699,13.1034319 L14.0081699,12.7383526 C14.0081699,12.1034319 14.1135348,10.6632203 14.3242646,10.4177176 C14.5349944,10.172215 14.9129549,10.0494637 15.4581458,10.0494637 L15.8177397,10.0494637 L15.8177397,6.83676525 L15.4581458,6.83676525 C14.9129549,6.83676525 14.5349944,6.71507213 14.3242646,6.47168589 C14.1135348,6.22829964 14.0081699,4.7870298 14.0081699,4.14787636 L14.0081699,3.782797 C14.0081699,2.84734726 13.8467393,2.22406684 13.5238779,1.91295573 C13.2010167,1.60184462 12.5601274,1.44628906 11.60121,1.44628906 L9.8177397,1.44628906 L9.8177397,3.65263827 L10.519528,3.65263827 C10.9255213,3.65263827 11.1971501,3.74364356 11.3344144,3.92565414 C11.4716788,4.10766472 11.540311,5.49708271 11.540311,6.09390811 L11.540311,6.42089224 C11.540311,7.11930494 11.6340761,7.61031023 11.8216063,7.89390811 C12.0091365,8.17750599 12.3464975,8.35951658 12.8336895,8.43993986 C12.3503642,8.52882875 12.0139698,8.71718853 11.8245063,9.00501922 C11.6350428,9.29284991 11.540311,9.7838552 11.540311,10.4780351 L11.540311,10.7796224 C11.540311,11.3849134 11.4707122,12.7785642 11.3315144,12.9605748 C11.1923168,13.1425854 10.9216547,13.2335906 10.519528,13.2335906 L9.8177397,13.2335906 L9.8177397,15.4462891 L11.60121,15.4462891 Z" id="}"/><path d="M3.03295652,15.4462891 C3.99187387,15.4462891 4.63276319,15.2896753 4.95562448,14.9764478 C5.27848577,14.6632203 5.43991641,14.0388817 5.43991641,13.1034319 L5.43991641,12.7383526 C5.43991641,12.1034319 5.54528132,10.6632203 5.75601114,10.4177176 C5.96674096,10.172215 6.34470133,10.0494637 6.88989225,10.0494637 L7.24948625,10.0494637 L7.24948625,6.83676525 L6.88989225,6.83676525 C6.34470133,6.83676525 5.96674096,6.71507213 5.75601114,6.47168589 C5.54528132,6.22829964 5.43991641,4.7870298 5.43991641,4.14787636 L5.43991641,3.782797 C5.43991641,2.84734726 5.27848577,2.22406684 4.95562448,1.91295573 C4.63276319,1.60184462 3.99187387,1.44628906 3.03295652,1.44628906 L1.24948625,1.44628906 L1.24948625,3.65263827 L1.95127455,3.65263827 C2.35726778,3.65263827 2.62889659,3.74364356 2.76616097,3.92565414 C2.90342535,4.10766472 2.97205754,4.49708271 2.97205754,5.09390811 L2.97205754,5.42089224 C2.97205754,6.11930494 3.06582265,7.61031023 3.25335285,7.89390811 C3.44088306,8.17750599 3.7782441,8.35951658 4.26543598,8.43993986 C3.7821107,8.52882875 3.44571631,8.71718853 3.25625281,9.00501922 C3.0667893,9.29284991 2.97205754,9.7838552 2.97205754,10.4780351 L2.97205754,10.7796224 C2.97205754,11.3849134 2.9024587,12.7785642 2.76326102,12.9605748 C2.62406334,13.1425854 2.35340119,13.2335906 1.95127455,13.2335906 L1.24948625,13.2335906 L1.24948625,15.4462891 L3.03295652,15.4462891 Z" id="}-copy" transform="translate(4.249486, 8.446289) scale(-1, 1) translate(-4.249486, -8.446289) "/></g></g></g></g><style data-styled="true" data-styled-version="5.3.5">.ejDZrz{cursor:pointer;}/*!sc*/
+data-styled.g80[id="sc-hNKHps"]{content:"ejDZrz,"}/*!sc*/
+.gofmjl{stroke:#555;background-color:#555;stroke-width:1px;}/*!sc*/
+data-styled.g81[id="sc-dsQDmV"]{content:"gofmjl,"}/*!sc*/
+.hTqHhA{fill:var(--color-text-form-secondary-1c3szk,#687078);}/*!sc*/
+data-styled.g92[id="sc-dFdIVH"]{content:"hTqHhA,"}/*!sc*/
+.iUlozD{font-weight:400;font-size:12px;line-height:16px;font-family:Amazon Ember,Arial,Roboto,Arial,sans-serif;text-shadow:none;fill:var(--color-text-body-default-7m2b3r,#16191f);}/*!sc*/
+data-styled.g93[id="sc-brCFrO"]{content:"iUlozD,"}/*!sc*/
+.dOOrib{fill:#fff9cc;stroke:var(--color-text-form-secondary-1c3szk,#687078);stroke-width:0.6px;}/*!sc*/
+data-styled.g94[id="sc-gITdmR"]{content:"dOOrib,"}/*!sc*/
+.hbQMNV{fill:#fff9cc;stroke:var(--color-text-form-secondary-1c3szk,#687078);stroke-width:0.6px;}/*!sc*/
+data-styled.g95[id="sc-evrZIY"]{content:"hbQMNV,"}/*!sc*/
+.mDZTb{stroke:var(--color-border-control-default-bwkbmv,#879596);stroke-width:1px;fill:var(--color-background-container-content-o88wxm,#ffffff);opacity:0.5;}/*!sc*/
+.node &gt; .new-look-state-node.has-errors &gt; .bounding-box &gt; .sc-fIavCj{stroke:var(--color-border-status-error-fybu9w,#d13212);fill:var(--color-background-status-error-h1a0iq,#fdf3f1);}/*!sc*/
+.selected &gt; .node &gt; .new-look-state-node &gt; .bounding-box &gt; .sc-fIavCj{stroke:var(--color-border-status-info-0iedcr,#0073bb);fill:var(--color-background-status-info-yq3r41,#f1faff);}/*!sc*/
+.selected &gt; .node &gt; .new-look-state-node.has-errors &gt; .bounding-box &gt; .sc-fIavCj{stroke:var(--color-border-status-error-fybu9w,#d13212);fill:#fde0da;}/*!sc*/
+data-styled.g96[id="sc-fIavCj"]{content:"mDZTb,"}/*!sc*/
+.zgit{opacity:1;}/*!sc*/
+data-styled.g97[id="sc-duzrYq"]{content:"zgit,"}/*!sc*/
+</style><style>
+.new-look-state-node &gt; rect:first-of-type {
+  stroke: #687078;
+  stroke-width: 1px;
+  fill: #FFFFFF;
+}
+
+.new-look-state-node .error-icon circle {
+ stroke-linejoin: round;
+}
+
+.new-look-state-node .error-icon circle, .new-look-state-node .error-icon path {
+ stroke: var(--color-border-status-error-fybu9w, #d13212);
+ fill: none;
+ stroke-width: 2px;
+}
+
+.new-look-state-node.has-errors &gt; rect:first-of-type {
+ stroke: var(--color-border-status-error-fybu9w, #d13212);
+ fill: var(--color-background-status-error-h1a0iq, #fdf3f1);
+}
+
+.new-look-state-node .handle path {
+  stroke: var(--color-border-dropdown-item-hover-d32f3f, #879596);
+  stroke-width: 1px;
+  fill: none;
+}
+
+.new-look-state-node {
+  font-weight: 400;
+  font-family: Amazon Ember, Arial, Roboto, Arial, sans-serif;
+  text-shadow: none;
+}
+
+.new-look-state-node .line1 {
+  fill: #687078;
+  font-size: 12px;
+}
+
+.selected.node &gt; .new-look-state-node &gt; rect,
+.selected.node &gt; .new-look-state-node &gt; .new-look-state-node &gt; rect,
+.selected.node &gt; .new-look-state-node &gt; .bounding-box &gt; .new-look-state-node-sub &gt; rect
+ {
+  stroke: var(--color-border-status-info-0iedcr, #0073bb);
+  fill: var(--color-background-status-info-yq3r41, #f1faff);
+  stroke-width: 1px;
+}
+
+.new-look-state-node-sub .item-source.not-specified {
+  height: 15px;
+  color: #687078;
+  font-family: "Amazon Ember";
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 16px;
+  font-weight: 400;
+}
+.new-look-state-node-sub .item-source .item-source_name{
+  font-weight: 600;
+}
+.new-look-state-node-sub .item-source.not-specified .item-source_name{
+  font-weight: 400;
+}
+
+.new-look-state-node-sub .item-source.not-specified {
+  font-style: italic;
+}
+
+
+
+.new-look-state-node-sub .item-source
+.selected.node &gt; .new-look-state-node.has-errors &gt; rect,
+.selected.node &gt; .new-look-state-node.has-errors &gt; .new-look-state-node &gt; rect,
+{
+ stroke: var(--color-border-status-error-fybu9w, #d13212);
+ fill: #fde0da;
+}
+
+.new-look-graph .drag-source {
+  opacity: 0.2;
+}
+
+.new-look-graph .edge, .new-look-graph path.starting-connection {
+  stroke-width: 1px;
+  stroke: var(--color-text-form-secondary-1c3szk, #687078);
+  marker-end: url(#large-arrowhead);
+}
+
+.new-look-graph .edge-label {
+  cursor: pointer;
+}
+
+.new-look-graph .edge-label rect {
+  stroke-width: 1px;
+  stroke: var(--color-border-control-default-bwkbmv, #879596);
+  fill: var(--color-background-container-header-g9rg0j, #fafafa);
+}
+
+.new-look-graph .edge-label.selected rect {
+  stroke: var(--color-border-status-info-0iedcr, #0073bb);
+  fill: var(--color-background-status-info-yq3r41, #f1faff);
+  stroke-width: 0.6px;
+}
+
+
+
+.new-look-graph .edge-label .label {
+  fill: var(--color-text-form-secondary-1c3szk, #687078);
+  font-family: Amazon Ember, Arial, Roboto, Arial, sans-serif;
+}
+
+/* centering the shape text */
+@-moz-document url-prefix() {
+  .new-look-graph .shape + text,
+  .new-look-graph .edge-label text {
+    transform: translateY(3.5px);
+  }
+}
+
+.new-look-graph .edge path {
+  marker-end: url(#large-arrowhead) !important;
+}
+
+.new-look-graph .edge.selected path{
+  stroke: var(--color-border-status-info-0iedcr, #0073bb);
+  stroke-width: 1.1px;
+}
+
+.new-look-graph .edge.dragging-over path, .new-look-graph  g.dragging-over .starting-connection {
+  stroke: #5C86FF;
+  stroke-width: 2px;
+}
+
+.new-look-graph .edge.dragging-over path, .new-look-graph .dragging-over path.starting-connection {
+  marker-end: url(#large-highlighted-arrowhead) !important;
+}
+
+.new-look-graph .edge.dragging-over .edge-label text {
+  fill: #5C86FF;
+}
+
+#large-highlighted-arrowhead {
+  fill: #5C86FF;
+}
+
+#large-highlighted-arrowhead path {
+  stroke: none;
+}
+
+.new-look-graph .edge.drop-not-supported path, g.drop-not-supported .starting-connection {
+  stroke: red;
+}
+
+.new-look-graph .edge.drop-not-supported .edge-label text {
+  fill: red;
+}
+
+.new-look-graph .edge.drop-not-supported path {
+  marker-end: url(#large-error-arrowhead) !important;
+}
+
+#large-error-arrowhead {
+  fill: red;
+}
+
+
+.node.Placeholder.dragging-over rect {
+  stroke: var(--color-border-status-info-0iedcr, #0073bb);
+  fill: var(--color-background-status-info-yq3r41, #f1faff);
+  stroke-width: 2px;
+}
+
+.node.Placeholder.dragging-over .label {
+  fill: var(--color-text-status-info-09r23g, #0073bb);
+}
+
+g.Placeholder rect {
+  stroke-dasharray: 5 4;
+  stroke: var(--color-border-dropdown-item-hover-d32f3f, #879596);
+  fill: var(--color-background-control-default-8xmy94, #ffffff);
+  stroke-width: 1px;
+}
+
+g.Placeholder .label {
+  font-style: italic;
+  fill: var(--color-text-input-placeholder-rtvjp5, #687078);
+}
+
+.node.Placeholder.drop-not-supported rect {
+  stroke: red;
+}
+
+.node.Placeholder.drop-not-supported .label {
+  fill: red;
+}
+</style><style>.line2 { font-size: 14px }</style></svg><text x="-65" y="-83.5" class="line1"><tspan class="item-source" xml:space="preserve" text-anchor="start">POLYMATH_GRAPH_ITEM_SOURCE<tspan class="item-source_name"><tspan>: JSON Payload</tspan></tspan></tspan></text></g><g class="content" transform="translate(-140,-144.5)"><g class="branch" transform="translate(20,124)"><g transform=""><g class="nodes"><g class="node-container" transform="translate(120,24.5)"><g class="sc-hNKHps ejDZrz node state Task" data-testid="graph-Process form" data-state-id="Process form" data-state-type="Task"><g class="new-look-state-node "><rect x="-120" y="-24.5" width="240" height="49" rx="3" ry="3"/><g class="handle" transform="translate(-120,-24.5)"><path d="M5,16 L5,34 M8,16 L8,34"/></g><g class="icon" transform="translate(-104,-24)"><rect fill="var(--color-background-container-header-g9rg0j, #fafafa)" x="0.0361026108" y="0.0181291967" width="48" height="48"/><line x1="47.5" y1="0.49122807" x2="47.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><line x1="0.5" y1="0.49122807" x2="0.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><use href="#icon-service-lam"/></g><g class="text-lines" transform="translate(-48,-24.5)"><text transform="translate(0,17)" class="line1"><tspan xml:space="preserve" text-anchor="start">Lambda: Invoke</tspan></text><text transform="translate(0,35.5)" class="line2 label"><tspan xml:space="preserve" text-anchor="start">Process form</tspan></text></g></g></g></g><g class="node-container" transform="translate(120,92)"><g><circle class="sc-evrZIY hbQMNV shape" r="8"/></g></g></g><g class="edges"><g class="sc-dsQDmV gofmjl edge"><path id="state-Process form:end:normal" d="M120,49L120,51.916666666666664C120,54.833333333333336,120,60.666666666666664,120,66.5C120,72.33333333333333,120,78.16666666666667,120,81.08333333333333L120,84" marker-end="url(#arrowhead)" fill="none"/></g></g></g></g><g class="sc-dsQDmV gofmjl"><path id="Process forms map state-Process form" class="path starting-connection" d="M140,69L140,73.58333333333333C140,78.16666666666667,140,87.33333333333333,140,91.91666666666667C140,96.5,140,96.5,140,101.08333333333333C140,105.66666666666667,140,114.83333333333333,140,119.41666666666667L140,124" fill="none"/></g></g></g><g class="new-look-state-node "><rect x="-120" y="-144.5" width="240" height="49" rx="3" ry="3"/><g class="handle" transform="translate(-120,-144.5)"><path d="M5,16 L5,34 M8,16 L8,34"/></g><g class="icon" transform="translate(-104,-144)"><rect fill="var(--color-background-container-header-g9rg0j, #fafafa)" x="0.0361026108" y="0.0181291967" width="48" height="48"/><line x1="47.5" y1="0.49122807" x2="47.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><line x1="0.5" y1="0.49122807" x2="0.5" y2="47.5" stroke="var(--color-text-home-header-secondary-g5rqe4, #d5dbdb)" stroke-linecap="square"/><use href="#icon-flow-map"/></g><g class="text-lines" transform="translate(-48,-144.5)"><text transform="translate(0,17)" class="line1"><tspan xml:space="preserve" text-anchor="start">Map state</tspan></text><text transform="translate(0,35.5)" class="line2 label"><tspan xml:space="preserve" text-anchor="start">Process forms map state</tspan></text></g></g></g></g></g><g class="node-container" transform="translate(278,674)"><g><circle class="sc-gITdmR dOOrib shape" r="22"/><text class="sc-brCFrO iUlozD label"><tspan xml:space="preserve" text-anchor="middle" alignment-baseline="central">End</tspan></text></g></g></g><g class="edges"><g class="sc-dsQDmV gofmjl edge"><path id="state-Query DynamoDB data:state-Process forms map state:normal" d="M278,293L278,295.9166666666667C278,298.8333333333333,278,304.6666666666667,278,310.5C278,316.3333333333333,278,322.1666666666667,278,325.0833333333333L278,328" marker-end="url(#arrowhead)" fill="none"/></g><g class="sc-dsQDmV gofmjl edge"><path id="start:state-Query DynamoDB data" d="M278,44L278,46.916666666666664C278,49.833333333333336,278,55.666666666666664,278,61.5C278,67.33333333333333,278,73.16666666666667,278,76.08333333333333L278,79" marker-end="url(#arrowhead)" fill="none"/></g><g class="sc-dsQDmV gofmjl edge"><path id="state-Process forms map state:end:normal" d="M278,617L278,619.9166666666666C278,622.8333333333334,278,628.6666666666666,278,634.5C278,640.3333333333334,278,646.1666666666666,278,649.0833333333334L278,652" marker-end="url(#arrowhead)" fill="none"/></g></g><defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 8 3, 0 6"/></marker><marker id="highlighted-arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 6 2, 0 4"/></marker><marker id="error-arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 6 2, 0 4"/></marker><marker id="large-arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 10 4, 0 8"/></marker><marker id="large-highlighted-arrowhead" markerWidth="5.5" markerHeight="4" refX="4.5" refY="2" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 5.5 2, 0 4"/></marker><marker id="large-error-arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" class="sc-dFdIVH hTqHhA"><polygon points="0 0, 10 4, 0 8"/></marker><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-orange"><stop stop-color="#C8511B" offset="0%"/><stop stop-color="#FF9900" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-turquoise"><stop stop-color="#055F4E" offset="0%"/><stop stop-color="#56C0A7" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-blue"><stop stop-color="#2E27AD" offset="0%"/><stop stop-color="#527FFF" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-pink"><stop stop-color="#B0084D" offset="0%"/><stop stop-color="#FF4F8B" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-red"><stop stop-color="#BD0816" offset="0%"/><stop stop-color="#FF5252" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-green"><stop stop-color="#1B660F" offset="0%"/><stop stop-color="#6CAE3E" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-purple"><stop stop-color="#4D27A8" offset="0%"/><stop stop-color="#A166FF" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-grey"><stop stop-color="#DCDCDC" offset="0%"/><stop stop-color="#F6F5F7" offset="100%"/></linearGradient>,<linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-ag"><stop stop-color="#BC1356" offset="0%"/><stop stop-color="#F34482" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-athena"><stop stop-color="#5930B5" offset="0%"/><stop stop-color="#945DF2" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-emr"><stop stop-color="#5930B5" offset="0%"/><stop stop-color="#945DF2" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-glue"><stop stop-color="#5930B5" offset="0%"/><stop stop-color="#945DF2" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-sns"><stop stop-color="#BC1356" offset="0%"/><stop stop-color="#F34482" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-states"><stop stop-color="#BC1356" offset="0%"/><stop stop-color="#F34482" offset="100%"/></linearGradient><linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="gradient-generic"><stop stop-color="#ccc" offset="0%"/><stop stop-color="#ddd" offset="100%"/></linearGradient><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="icon-flow-map"><g transform="translate(7.250000, 12.250000)" fill="#0073BB" fill-rule="nonzero"><path d="M18.75,6.75 C19.3022847,6.75 19.75,7.19771525 19.75,7.75 L19.75,10.75 C19.75,11.3022847 19.3022847,11.75 18.75,11.75 L17,11.75 L17,14.75 L18.75,14.75 C19.3022847,14.75 19.75,15.1977153 19.75,15.75 L19.75,18.75 C19.75,19.3022847 19.3022847,19.75 18.75,19.75 L13.75,19.75 C13.1977153,19.75 12.75,19.3022847 12.75,18.75 L12.75,15.75 C12.75,15.1977153 13.1977153,14.75 13.75,14.75 L15.5,14.75 L15.5,11.75 L13.75,11.75 C13.1977153,11.75 12.75,11.3022847 12.75,10.75 L12.75,7.75 C12.75,7.19771525 13.1977153,6.75 13.75,6.75 L18.75,6.75 Z M18.25,16.25 L14.25,16.25 L14.25,18.25 L18.25,18.25 L18.25,16.25 Z M18.25,8.25 L14.25,8.25 L14.25,10.25 L18.25,10.25 L18.25,8.25 Z"/><path d="M4.36774058,12.9781551 L4.25581637,12.9873783 L4.25581637,12.9873783 L4.16664164,12.9827819 L4.16664164,12.9827819 L4.09909543,12.9721471 L4.09909543,12.9721471 L4.01772926,12.9506961 L4.01772926,12.9506961 L3.9143938,12.9083506 L3.9143938,12.9083506 L3.84086306,12.8661585 L3.84086306,12.8661585 L3.80378835,12.840349 L3.80378835,12.840349 L3.71966991,12.7677308 L0.219669914,9.26773081 C-0.0732233047,8.97483759 -0.0732233047,8.49996385 0.219669914,8.20707064 C0.485936477,7.94080407 0.902600159,7.91659802 1.19621165,8.13445248 L1.28033009,8.20707064 L3.5,10.427 L3.5,5.75 C3.5,2.64821472 5.95601719,0.120062989 9.02944429,0.00415208345 L9.25,-4.97379915e-14 L24.25,-4.97379915e-14 C27.3101239,-4.97379915e-14 29.8183331,2.39279152 29.9905671,5.41800288 L29.9990775,5.65628924 L30,7.75 C30,8.16421356 29.6642136,8.5 29.25,8.5 C28.8357864,8.5 28.5,8.16421356 28.5,7.75 L28.4992379,5.66855413 C28.4572345,3.42607261 26.6797069,1.6129038 24.4594105,1.50507399 L24.25,1.5 L9.25,1.5 C6.97182541,1.5 5.11231326,3.29250701 5.00490093,5.54408366 L5,5.75 L5,10.426 L7.21966991,8.20707064 L7.30378835,8.13445248 C7.59739984,7.91659802 8.01406352,7.94080407 8.28033009,8.20707064 C8.54659665,8.4733372 8.5708027,8.89000088 8.35294824,9.18361237 L8.28033009,9.26773081 L4.78033009,12.7677308 C4.74270234,12.8053586 4.70207113,12.8381523 4.65920816,12.866112 L4.58539483,12.9084563 L4.58539483,12.9084563 L4.50825575,12.9417254 L4.50825575,12.9417254 L4.44163507,12.9626313 L4.44163507,12.9626313 L4.36774058,12.9781551 L4.36774058,12.9781551 Z"/><path d="M29.1567308,12.467303 L29.2441836,12.4615381 L29.2441836,12.4615381 L29.3612017,12.4697569 L29.3612017,12.4697569 L29.4099419,12.4786795 L29.4099419,12.4786795 L29.4761141,12.4962504 L29.4761141,12.4962504 L29.5349097,12.5175276 L29.5349097,12.5175276 L29.6051875,12.5507277 L29.6051875,12.5507277 L29.6962117,12.6085674 L29.6962117,12.6085674 L29.7803301,12.6811856 L33.2803301,16.1811856 C33.5732233,16.4740788 33.5732233,16.9489525 33.2803301,17.2418457 C33.0140635,17.5081123 32.5973998,17.5323184 32.3037883,17.3144639 L32.2196699,17.2418457 L30,15.0225381 L30,19.75 C30,22.8517853 27.5439828,25.379937 24.4705557,25.4958479 L24.25,25.5 L9.25,25.5 C6.22364937,25.5 3.73212863,23.1580245 3.51530256,20.1724864 L3.50299507,19.9226196 L3.5,17.75 C3.5,17.3357864 3.83578644,17 4.25,17 C4.62969577,17 4.94349096,17.2821539 4.99315338,17.6482294 L5,17.75 L5.00247606,19.8966995 C5.07738217,22.1119658 6.84520232,23.8893416 9.04275865,23.9950272 L9.25,24 L24.25,24 C26.5281746,24 28.3876867,22.207493 28.4950991,19.9559163 L28.5,19.75 L28.5,15.0215381 L26.2803301,17.2418457 L26.1962117,17.3144639 C25.9026002,17.5323184 25.4859365,17.5081123 25.2196699,17.2418457 C24.9534034,16.9755792 24.9291973,16.5589155 25.1470518,16.265304 L25.2196699,16.1811856 L28.7196699,12.6811856 L28.7969693,12.6136874 L28.7969693,12.6136874 L28.8948226,12.5507257 L28.8948226,12.5507257 L28.96499,12.5175687 L28.96499,12.5175687 L29.0426978,12.4905912 L29.0426978,12.4905912 L29.0900352,12.4786762 L29.0900352,12.4786762 L29.1567308,12.467303 L29.1567308,12.467303 Z"/></g></g><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="icon-flow-parallel"><g transform="translate(7.794758, 8.750000)" fill="#0073BB" fill-rule="nonzero"><path d="M16.199562,30.9615157 L16.1088907,30.9567289 L16.0428411,30.9462621 L15.9289205,30.9134016 L15.8581395,30.8824655 L15.747534,30.8144639 L15.6634156,30.7418457 L12.1634156,27.2418457 C11.8705224,26.9489525 11.8705224,26.4740788 12.1634156,26.1811856 C12.4296821,25.914919 12.8463458,25.890713 13.1399573,26.1085674 L13.2240758,26.1811856 L15.455,28.412 L15.455,12.999 L4.95524179,12.999 L4.955,28.446 L7.21966991,26.1811856 L7.30378835,26.1085674 C7.59739984,25.890713 8.01406352,25.914919 8.28033009,26.1811856 C8.54659665,26.4474521 8.5708027,26.8641158 8.35294824,27.1577273 L8.28033009,27.2418457 L4.78033009,30.7418457 L4.69621165,30.8144639 L4.689,30.818 C4.66089447,30.8406686 4.6237969,30.8633711 4.58539483,30.8825712 L4.50825575,30.9158403 L4.44163507,30.9367462 L4.36774058,30.9522701 L4.27779844,30.9610057 L4.22212648,30.9610007 L4.09909543,30.9462621 L3.99176083,30.9158467 L3.9143938,30.8824655 L3.82554184,30.8300094 L3.80378835,30.8144639 L3.71966991,30.7418457 L0.219669914,27.2418457 C-0.0732233047,26.9489525 -0.0732233047,26.4740788 0.219669914,26.1811856 C0.485936477,25.914919 0.902600159,25.890713 1.19621165,26.1085674 L1.28033009,26.1811856 L3.455,28.356 L3.45524179,12.25 C3.45524179,11.8703042 3.73739568,11.556509 4.10347124,11.5068466 L4.20524179,11.5 L15.455,11.502 L15.4552418,-1.42108547e-13 L16.9552418,-1.42108547e-13 L16.955,11.495 L28.1555171,11.5 C28.5351143,11.5001394 28.8487603,11.7822674 28.8983985,12.1482549 L28.9052418,12.25 L28.905,28.44 L31.1641955,26.1811856 L31.2483139,26.1085674 C31.5419254,25.890713 31.9585891,25.914919 32.2248557,26.1811856 C32.4911222,26.4474521 32.5153283,26.8641158 32.2974738,27.1577273 L32.2248557,27.2418457 L28.7248557,30.7418457 C28.6845386,30.7821628 28.6407734,30.8169302 28.5945094,30.8461478 L28.5328469,30.8811 L28.4268027,30.9248089 L28.3112733,30.9524264 L28.1887092,30.9615157 L28.1087231,30.9566189 L28.0352714,30.9445058 L27.9277401,30.9126603 L27.8920604,30.8980433 L27.8568141,30.8814079 C27.8351606,30.8704626 27.8145136,30.8587698 27.7943421,30.8460217 C27.7482777,30.8169302 27.7045126,30.7821628 27.6641955,30.7418457 L24.1641955,27.2418457 C23.8713023,26.9489525 23.8713023,26.4740788 24.1641955,26.1811856 C24.4304621,25.914919 24.8471258,25.890713 25.1407372,26.1085674 L25.2248557,26.1811856 L27.405,28.362 L27.4052418,12.999 L16.955,12.992 L16.955,28.389 L19.1634156,26.1811856 L19.247534,26.1085674 C19.5411455,25.890713 19.9578092,25.914919 20.2240758,26.1811856 C20.4903423,26.4474521 20.5145484,26.8641158 20.2966939,27.1577273 L20.2240758,27.2418457 L16.7240758,30.7418457 L16.6399573,30.8144639 L16.636,30.816 L16.589136,30.8490255 L16.5330413,30.8806066 L16.4260228,30.9248089 L16.3532729,30.9444467 L16.2795333,30.9566255 L16.199562,30.9615157 Z"/></g></g><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="icon-service-ddb"><polygon fill="url(#gradient-blue)" fill-rule="nonzero" points="0 0 48 0 48 48 0 48"/><path d="M34.5810287,19.5947556 L32.1910412,19.5947556 C31.9723757,19.5947556 31.7677101,19.4862534 31.6430441,19.3049671 C31.5183781,19.1230069 31.4897116,18.8911762 31.5670445,18.6842807 L33.2290358,14.2033421 L27.287067,14.2033421 L24.559748,20.2686823 L27.5243991,20.2686823 C27.738398,20.2686823 27.9397302,20.372467 28.0657296,20.5490358 C28.1903956,20.7242568 28.2250621,20.9500222 28.1563958,21.1555699 L25.7164086,28.5559589 L34.5810287,19.5947556 Z M36.6616844,19.3972951 L24.6624141,31.5279756 C24.5344148,31.6580435 24.3630824,31.7254361 24.1910833,31.7254361 C24.0697506,31.7254361 23.9490845,31.6924137 23.8410851,31.6250211 C23.5777532,31.4605829 23.4604204,31.1350764 23.5590866,30.8385486 L26.5990706,21.6165357 L23.5244201,21.6165357 C23.2977546,21.6165357 23.0870891,21.4999464 22.9637564,21.3078773 C22.841757,21.1144603 22.8237571,20.8725206 22.9177566,20.6636034 L26.2510724,13.2504097 C26.3590719,13.0098179 26.5957373,12.8554887 26.8577359,12.8554887 L34.1910307,12.8554887 C34.4096962,12.8554887 34.6143618,12.9639909 34.7390278,13.1452772 C34.8636938,13.3272374 34.8923603,13.5590681 34.8156941,13.7659636 L33.1530362,18.2469022 L36.1903535,18.2469022 C36.4596854,18.2469022 36.7036842,18.4113403 36.8063503,18.662715 C36.9096831,18.9147636 36.85235,19.2045521 36.6616844,19.3972951 L36.6616844,19.3972951 Z M30.8577149,32.241664 C29.0510577,33.4992112 25.7330752,34.163029 22.5457586,34.163029 C19.3351088,34.163029 15.9877931,33.4904502 14.1904692,32.214033 L14.1911358,34.7581063 C14.1911358,35.8673896 17.3697858,37.4140514 22.5457586,37.4140514 C27.542399,37.4140514 30.8577149,35.6126453 30.8577149,34.4211429 L30.8577149,32.241664 Z M32.2337077,30.0621851 C32.2337077,30.1868615 32.2123744,30.3068204 32.1910412,30.4261055 L32.1910412,34.4211429 C32.1910412,36.8149305 27.8643973,38.7619048 22.5457586,38.7619048 C17.9437828,38.7619048 13.2984739,37.5023358 12.8971426,35.0950696 L12.8578095,35.0950696 L12.8571429,31.7254361 L12.8571429,22.9643891 L12.8571429,13.5294154 L12.8578095,13.5294154 C12.8578095,10.8653831 17.8491166,9.42857143 22.5457586,9.42857143 C25.1730781,9.42857143 27.6990648,9.85516703 29.4770555,10.5991821 L28.9663915,11.8445986 C27.3450667,11.1652805 25.0044123,10.7764248 22.5457586,10.7764248 C17.3697858,10.7764248 14.1911358,12.3796964 14.1911358,13.5294154 C14.1911358,14.6791343 17.3697858,16.2824059 22.5457586,16.2824059 C22.6757579,16.2824059 22.8117572,16.2830798 22.9430898,16.2776884 L22.9950896,17.624194 C22.8450903,17.6302593 22.6957578,17.6302593 22.5457586,17.6302593 C19.3344421,17.6302593 15.9877931,16.9576805 14.1904692,15.6812633 L14.1904692,18.5865613 L14.1911358,18.5865613 L14.1911358,18.598018 C14.1944692,18.9511556 14.5171341,19.3602291 15.1004644,19.7443674 C16.4217908,20.60295 18.8004449,21.1899401 21.4597643,21.3119208 L21.399098,22.6584264 C18.6484457,22.5317282 16.2324584,21.9460859 14.6751333,21.0477416 C14.4684677,21.24655 14.1911358,21.751995 14.1911358,22.0256092 C14.1911358,23.1753282 17.3697858,24.7785998 22.5457586,24.7785998 C23.037756,24.7785998 23.5224201,24.7617516 23.9870843,24.7287292 L24.0810839,26.0732129 C23.5850865,26.1089311 23.0684225,26.1264532 22.5457586,26.1264532 C19.3344421,26.1264532 15.9877931,25.4538743 14.1904692,24.1774572 L14.1904692,26.6238111 L14.1911358,26.6238111 C14.1944692,26.9884054 14.5171341,27.3974789 15.1004644,27.7816171 C16.6124564,28.7648762 19.4664414,29.3774755 22.5457586,29.3774755 L22.7657574,29.3774755 L22.7657574,30.7253289 L22.5457586,30.7253289 C19.360442,30.7253289 15.9724598,30.053424 14.1911358,29.0297294 C13.9764703,29.2285377 14.1911358,29.7036561 14.1911358,30.0621851 C14.1911358,31.211904 17.3697858,32.8151756 22.5457586,32.8151756 C27.722398,32.8151756 30.9003813,31.211904 30.9003813,30.0621851 C30.9003813,29.6558073 30.5010501,29.2790822 30.1723852,29.0364686 C29.8997199,29.2009067 29.5997215,29.3586056 29.2577233,29.5028259 L28.745726,28.2580833 C29.0997241,28.1091455 29.4057225,27.9494249 29.6550545,27.7836389 C30.3890507,27.2943681 30.8577149,26.5982018 30.8577149,26.3340226 L32.1910412,26.3340226 C32.1910412,26.9607744 31.7770434,27.6320054 31.2463795,28.1839514 C32.041042,28.8774219 32.2337077,29.5695446 32.2337077,30.0621851 L32.2337077,30.0621851 Z M14.9517985,35.0209377 C15.4791291,35.2932041 16.0957925,35.5358177 16.7864555,35.7413653 L17.1624536,34.4481 C16.5517901,34.2668137 16.0117929,34.0552007 15.558462,33.8206742 L14.9517985,35.0209377 Z M16.7864555,27.654245 L17.1624536,26.3616536 C16.5517901,26.1796934 16.0117929,25.9687543 15.558462,25.7342278 L14.9517985,26.9338173 C15.4791291,27.2067576 16.0957925,27.4486973 16.7864555,27.654245 L16.7864555,27.654245 Z M14.9517985,18.8473709 L15.558462,17.6471075 C16.0117929,17.881634 16.5517901,18.092573 17.1624536,18.2745332 L16.7864555,19.5677986 C16.0957925,19.3622509 15.4791291,19.1196373 14.9517985,18.8473709 L14.9517985,18.8473709 Z" fill="#FFFFFF"/></g><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="icon-service-lam"><polygon fill="url(#gradient-orange)" fill-rule="nonzero" points="0 0 48 0 48 48 0 48"/><g transform="translate(11, 10)" fill="#FFFFFF"><path d="M26.5889213,27.8937088 L19.6925948,27.8937088 C19.4772752,27.8931074 19.2813916,27.7706914 19.1888047,27.578869 L9.43766764,7.45673404 L5.31218659,7.45673404 C5.00303594,7.45673404 4.75241983,7.20943823 4.75241983,6.90438337 L4.75241983,0.828526005 C4.75241983,0.523471153 5.00303594,0.276175335 5.31218659,0.276175335 L13.9325948,0.276175335 C14.1479143,0.276776788 14.3437979,0.399192787 14.4363848,0.591015217 L24.1427405,20.7131501 L26.5889213,20.7131501 C26.8980719,20.7131501 27.148688,20.9604459 27.148688,21.2655008 L27.148688,27.3413582 C27.148688,27.646413 26.8980719,27.8937088 26.5889213,27.8937088 Z M20.0452478,26.7890075 L26.0291545,26.7890075 L26.0291545,21.8178515 L23.7900875,21.8178515 C23.5747679,21.81725 23.3788843,21.694834 23.2862974,21.5030116 L13.5799417,1.38087667 L5.87755102,1.38087667 L5.87755102,6.3520327 L9.79591837,6.3520327 C10.0112379,6.35263416 10.2071215,6.47505016 10.2997085,6.66687259 L20.0452478,26.7890075 Z"/><path d="M8.10542274,27.8937099 L0.82845481,27.8937099 C0.635054571,27.8940907 0.455155006,27.7959347 0.352653061,27.634104 C0.243858391,27.4681848 0.233185428,27.2575536 0.324664723,27.0817533 L7.93749271,11.3894708 C8.03007964,11.1976484 8.22596323,11.0752324 8.4412828,11.0746298 L8.4412828,11.0746298 C8.65533487,11.0742082 8.85089022,11.1942751 8.94507289,11.3839473 L12.5891545,18.7799228 C12.6634688,18.931712 12.6634688,19.1086786 12.5891545,19.2604679 L8.6148105,27.5457279 C8.53147526,27.7523199 8.33072312,27.8894609 8.10542274,27.8937099 L8.10542274,27.8937099 Z M1.72408163,26.7890075 L7.75276968,26.7890075 L11.4640233,19.0560981 L8.44688047,12.8973881 L1.72408163,26.7890075 Z"/></g></g></defs></g></svg>
