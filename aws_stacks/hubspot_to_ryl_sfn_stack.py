@@ -1,3 +1,5 @@
+import json
+
 from aws_cdk import CfnOutput, Duration, Stack
 from aws_cdk import aws_events as events
 from aws_cdk import aws_events_targets as targets
@@ -65,7 +67,7 @@ class HubspotToRYLSfnStack(Stack):
             construct_id + "lambda",
             function_name=construct_id + "lambdafunc",
             runtime=_lambda.Runtime.PYTHON_3_9,
-            timeout=Duration.minutes(1),
+            timeout=Duration.minutes(15),
             handler="main.lambda_handler",
             code=_lambda.Code.from_asset("src"),
             layers=[aws_powertools_layer, requests_layer],
@@ -98,18 +100,43 @@ class HubspotToRYLSfnStack(Stack):
             ],
         )
 
+        get_creds_task = sfn_tasks.CallAwsService(
+            self,
+            "Get creds item",
+            service="dynamodb",
+            action="getItem",
+            parameters={
+                "TableName": table_name,
+                "Key": {"pk": {"S": "creds"}, "sk": {"S": "ryl"}},
+            },
+            iam_resources=[
+                f"arn:aws:dynamodb:{self.region}:{self.account}:table/{table_name}"
+            ],
+        )
+
         process_forms_map = sfn.Map(
             self,
             "Process forms map state",
             max_concurrency=3,
-            items_path=sfn.JsonPath.string_at("$.Items"),
+            items_path=sfn.JsonPath.string_at("$.forms"),
+            parameters={"form.$": "$$.Map.Item.Value", "creds.$": "$.creds"},
             result_selector={"flatten.$": "$[*].Payload"},
-            output_path="$.flatten",
+            output_path="$.flatten[?(@.tot >= 1)]",
         ).iterator(
             sfn_tasks.LambdaInvoke(self, "Process form", lambda_function=lambda_func)
         )
 
-        definition = query_forms_task.next(process_forms_map)
+        query_parallel = (
+            sfn.Parallel(
+                self,
+                "Query DynamoDB data",
+                result_selector={"forms.$": "$[0].Items", "creds.$": "$[1].Item"},
+            )
+            .branch(query_forms_task)
+            .branch(get_creds_task)
+        )
+
+        definition = query_parallel.next(process_forms_map)
 
         state_machine = sfn.StateMachine(
             self, "HubspotToRYLStateMachine", definition=definition
