@@ -109,4 +109,18 @@ class HubspotToRYLSfnStack(Stack):
 
         definition = query_forms_task.next(process_forms_map)
 
-        sfn.StateMachine(self, "HubspotToRYLStateMachine", definition=definition)
+        state_machine = sfn.StateMachine(
+            self, "HubspotToRYLStateMachine", definition=definition
+        )
+
+        state_machine_target = targets.SfnStateMachine(machine=state_machine)
+
+        events.Rule(
+            self,
+            construct_id + "cronrule",
+            rule_name=construct_id + "-rule",
+            description="Hubspot to RYL step function run schedule",
+            enabled=True,
+            schedule=events.Schedule.cron(minute="*/2"),
+            targets=[state_machine_target],
+        )
