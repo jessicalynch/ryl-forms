@@ -1,14 +1,15 @@
-from aws_cdk import CfnOutput, Stack
+from aws_cdk import CfnOutput, Duration, Stack
 from aws_cdk import aws_events as events
 from aws_cdk import aws_events_targets as targets
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_logs as logs
-from aws_cdk import Duration
+from aws_cdk import aws_stepfunctions as sfn
+from aws_cdk import aws_stepfunctions_tasks as sfn_tasks
 from constructs import Construct
 
 
-class HubspotToRYLStack(Stack):
+class HubspotToRYLSfnStack(Stack):
     def __init__(
         self, scope: Construct, construct_id: str, table_name: str, **kwargs
     ) -> None:
@@ -73,18 +74,55 @@ class HubspotToRYLStack(Stack):
             log_retention=logs.RetentionDays.ONE_WEEK,
         )
 
-        rule = events.Rule(
-            self,
-            "Rule",
-            schedule=events.Schedule.cron(minute="*"),
-        )
-
-        rule.add_target(targets.LambdaFunction(lambda_func))
-
         CfnOutput(
             self,
             id=construct_id + "lmdarncfnoutput",
             export_name=construct_id + "-lambdaarn",
             description=construct_id + " lambda arn",
             value=lambda_func.function_arn,
+        )
+
+        query_forms_task = sfn_tasks.CallAwsService(
+            self,
+            "Query all Hubspot form IDs",
+            service="dynamodb",
+            action="query",
+            parameters={
+                "TableName": table_name,
+                "KeyConditionExpression": "#pk = :pk",
+                "ExpressionAttributeNames": {"#pk": "pk"},
+                "ExpressionAttributeValues": {":pk": {"S": "hsform"}},
+            },
+            iam_resources=[
+                f"arn:aws:dynamodb:{self.region}:{self.account}:table/{table_name}"
+            ],
+        )
+
+        process_forms_map = sfn.Map(
+            self,
+            "Process forms map state",
+            max_concurrency=3,
+            items_path=sfn.JsonPath.string_at("$.Items"),
+            result_selector={"flatten.$": "$[*].Payload"},
+            output_path="$.flatten",
+        ).iterator(
+            sfn_tasks.LambdaInvoke(self, "Process form", lambda_function=lambda_func)
+        )
+
+        definition = query_forms_task.next(process_forms_map)
+
+        state_machine = sfn.StateMachine(
+            self, "HubspotToRYLStateMachine", definition=definition
+        )
+
+        state_machine_target = targets.SfnStateMachine(machine=state_machine)
+
+        events.Rule(
+            self,
+            construct_id + "cronrule",
+            rule_name=construct_id + "-rule",
+            description="Hubspot to RYL step function run schedule",
+            enabled=True,
+            schedule=events.Schedule.cron(minute="*/5"),
+            targets=[state_machine_target],
         )

@@ -65,7 +65,7 @@ class DynamoDBTable:
 
         return resp["Items"]
 
-    def query_item_by_composite_key(self, partition_key: str, sort_key: str):
+    def get_item_by_composite_key(self, partition_key: str, sort_key: str):
         if not self.sort_key_attr:
             raise ValueError("This table does not have a sort key defined")
 
