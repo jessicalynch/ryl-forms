@@ -103,6 +103,8 @@ class HubspotToRYLSfnStack(Stack):
             "Process forms map state",
             max_concurrency=3,
             items_path=sfn.JsonPath.string_at("$.Items"),
+            result_selector={"flatten.$": "$[*].Payload"},
+            output_path="$.flatten",
         ).iterator(
             sfn_tasks.LambdaInvoke(self, "Process form", lambda_function=lambda_func)
         )
@@ -121,6 +123,6 @@ class HubspotToRYLSfnStack(Stack):
             rule_name=construct_id + "-rule",
             description="Hubspot to RYL step function run schedule",
             enabled=True,
-            schedule=events.Schedule.cron(minute="*/2"),
+            schedule=events.Schedule.cron(minute="*/5"),
             targets=[state_machine_target],
         )
