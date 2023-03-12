@@ -118,7 +118,8 @@ def lambda_handler(event: dict, context: dict):
             }
 
             db.put_item(last_run_item)
-            return {"tot": submitted}
+            
+        return {"tot": submitted}
 
     except requests.exceptions.RequestException:
         logger.exception("Failed to connect to Hubspot")
