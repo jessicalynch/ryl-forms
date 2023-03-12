@@ -3,7 +3,8 @@ from __future__ import annotations
 import json
 from typing import Annotated, Optional
 
-from aws_lambda_powertools.utilities.parser import BaseModel, Field, root_validator
+from aws_lambda_powertools.utilities.parser import (BaseModel, Field,
+                                                    root_validator)
 
 
 class HubspotIntake(BaseModel):

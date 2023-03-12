@@ -4,16 +4,16 @@ from typing import List
 
 import requests
 from aws_lambda_powertools import Logger
-from boto3.dynamodb.types import TypeDeserializer
+from aws_lambda_powertools.utilities.parser import event_parser
+from aws_lambda_powertools.utilities.typing import LambdaContext
 
 from models.dynamodbtable import HubspotToRYLTable
-from models.models import HubspotIntake, RYLIntake
+from models.forms import HubspotIntake, RYLIntake
+from models.lambdaevents import EventInput
 
 logger = Logger(service="RYL")
-deserializer = TypeDeserializer()
 
 HS_PAGE_SIZE = 20  # hubspot result limit can be between 20 and 50
-HS_URL_BASE = "https://api.hubapi.com/form-integrations/v1/submissions/forms/"
 TABLE_NAME = os.environ.get("TABLE_NAME")
 
 
@@ -24,24 +24,22 @@ def ms_to_utc_timestamp(ms: int) -> str:
     return iso_str
 
 
-def lambda_handler(event: dict, context: dict):
-    form_item = {k: deserializer.deserialize(v) for k, v in event.items()}
-    form_id = form_item.get("sk")
-    form_desc = form_item.get("desc")
-    topic_id = form_item.get("topic_id")
-
+@event_parser(model=EventInput)
+def lambda_handler(event: EventInput, context: LambdaContext):
     if not TABLE_NAME:
-        return {"status": 500, "body": "Failed to get table name from env vars"}
+        raise ValueError("Failed to get table name from env vars")
+
+    form_id = event.form.sk
+    form_desc = event.form.desc
+    topic_id = event.form.topic_id
 
     db = HubspotToRYLTable(table_name=TABLE_NAME)
     creds = db.get_item_by_composite_key(partition_key="creds", sort_key="ryl")
 
-    if not creds:
-        return {"status": 401, "body": "Failed to get API credentials from table"}
-
-    hs_key = creds.get("hskey")
-    ryl_auth_key = creds.get("mcmauthkey")
-    ryl_url = creds.get("rylurl")
+    hs_key = event.creds.hskey
+    ryl_auth_key = event.creds.mcmauthkey
+    ryl_url = event.creds.rylurl
+    hs_url = event.creds.hsurl
     headers = {"Authorization": "Bearer " + hs_key}
 
     last_run_item = db.get_item_by_composite_key(
@@ -54,7 +52,7 @@ def lambda_handler(event: dict, context: dict):
     new_submissions: List[HubspotIntake] = []
     hs_next_link = ""
     while True:
-        post_url = f"{HS_URL_BASE}{form_id}?limit={HS_PAGE_SIZE}{hs_next_link}"
+        post_url = f"{hs_url}{form_id}?limit={HS_PAGE_SIZE}{hs_next_link}"
         resp = requests.get(post_url, headers=headers).json()
 
         # Filter out submissions older than previous job run
@@ -91,7 +89,7 @@ def lambda_handler(event: dict, context: dict):
             payload = ryl_intake.dict()
 
             ryl_resp = requests.post(ryl_url, data=payload)
-            if ryl_resp.status_code not in [200, 201]:
+            if ryl_resp.status_code != 200:
                 break
 
             # Update last run ms after successful submission

@@ -14,6 +14,7 @@ env = {
 app = App()
 
 table_name = "main-street-law-firm-dev"
+stage_name = os.environ.get("RYL_STAGE_NAME", "dev")
 
 HubspotToRYLTableStack(
     scope=app,
@@ -24,7 +25,10 @@ HubspotToRYLTableStack(
 
 
 HubspotToRYLSfnStack(
-    scope=app, env=env, construct_id="hubspot-to-ryl-sfn-dev", table_name=table_name
+    scope=app,
+    env=env,
+    construct_id=f"hubspot-to-ryl-sfn-{stage_name}",
+    table_name=table_name,
 )
 
 Tags.of(app).add("billing", "mslf")
