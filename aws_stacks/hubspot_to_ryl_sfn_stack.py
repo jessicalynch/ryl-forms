@@ -1,5 +1,3 @@
-import json
-
 from aws_cdk import CfnOutput, Duration, Stack
 from aws_cdk import aws_events as events
 from aws_cdk import aws_events_targets as targets
